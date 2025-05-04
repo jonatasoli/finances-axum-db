@@ -1,0 +1,7 @@
+{% for transaction in transactions %}
+<div id="tx-{{ transaction.id }}">
+  <p><strong>{{ transaction.kind | capitalize }}:</strong> {{ transaction.amount }} - {{ transaction.description }} {% if transaction.tag %} ({{ transaction.tag }}) {% endif %}</p>
+  <button hx-delete="/transactions/{{ transaction.id }}" hx-target="#tx-{{ transaction.id }}" hx-swap="delete">Delete</button>
+  <button hx-get="/transactions/{{ transaction.id }}/edit" hx-target="#tx-{{ transaction.id }}" hx-swap="outerHTML">Edit</button>
+</div>
+{% endfor %}

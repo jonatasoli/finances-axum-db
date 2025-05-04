@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Finance Transactions</title>
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+  <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+</head>
+<body>
+  <main class="container">
+    <h1>Financial Transactions</h1>
+    <form id="tx-form" hx-post="/transactions" hx-trigger="submit" hx-target="#tx-list" hx-swap="beforeend">
+      <div class="grid">
+        <label>Type:
+          <select name="kind">
+            <option value="credit">Credit</option>
+            <option value="debit">Debit</option>
+          </select>
+        </label>
+        <label>Amount:
+          <input type="number" name="amount" step="0.01" required />
+        </label>
+        <label>Description:
+          <input type="text" name="description" required />
+        </label>
+        <label>Tag:
+          <input type="text" name="tag" />
+        </label>
+      </div>
+      <button type="submit">Add Transaction</button>
+    </form>
+
+    <h2>Transaction List</h2>
+    <div id="tx-list" hx-get="/transactions" hx-trigger="load" hx-swap="innerHTML">
+      <!-- Transactions will be loaded here -->
+    </div>
+  </main>
+</body>
+</html>
